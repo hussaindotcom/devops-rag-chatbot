@@ -1,26 +1,28 @@
-DevOps RAG Chatbot
+DevOps RAG Chatbot 🤖
 
-A Retrieval-Augmented Generation (RAG) chatbot for DevOps, built to answer queries about deploying and troubleshooting microservices on AWS EKS, S3, Lambda, and more. It uses a Chroma vector store for document retrieval and Google's Gemini API for generating concise, accurate responses.
-Features
+A Retrieval-Augmented Generation (RAG) chatbot designed for DevOps professionals, powered by LangChain, Chroma, and Google’s Gemini API. Query deployment steps and troubleshoot AWS-based microservices (EKS, S3, Lambda) with a sleek Streamlit interface.
 
-Microservice Docs: Answers questions based on 10 microservice deployment guides (e.g., UserAuthService, PaymentGatewayService).
-RAG Architecture: Combines LangChain's retrieval with Gemini's generation for contextual, DevOps-focused responses.
-Streamlit UI: Interactive web interface for querying deployment steps and troubleshooting tips.
-Local Vector Store: Uses Chroma DB to store embedded microservice documentation.
-Secure Setup: API keys managed via .env to prevent leakage.
+✨ Features
 
+Microservice Expertise: Answers queries on 10 AWS microservices (e.g., UserAuthService, PaymentGatewayService).
+RAG-Powered: Combines Chroma vector store for document retrieval with Gemini’s natural language generation.
+Interactive UI: Streamlit web app for easy querying.
+Secure: API keys stored in .env (not tracked by Git).
+Scalable: Add new microservice docs easily.
+
+🚀 Quick Start
 Prerequisites
 
-Python 3.11
-Git
-Google Gemini API key (Get one here)
-~2GB disk space for dependencies and Chroma DB
-macOS/Linux (tested on macOS with Apple Silicon)
+🐍 Python 3.11
+📦 Git
+🔑 Google Gemini API key (Get one)
+💾 ~2GB disk space
+🖥️ macOS/Linux (tested on macOS with Apple Silicon)
 
 Installation
 
 Clone the Repository:
-git clone https://github.com/hussaindotcom/devops-rag-chatbot.git
+git clone https://github.com/your-username/devops-rag-chatbot.git
 cd devops-rag-chatbot
 
 
@@ -33,12 +35,12 @@ Install Dependencies:
 pip install -r requirements.txt
 
 
-Set Up Gemini API Key:Create a .env file in the project root:
+Configure Gemini API Key:Create a .env file:
 echo "GOOGLE_API_KEY=your-api-key" > .env
 
-Replace your-api-key with your Gemini API key.
+Replace your-api-key with your Gemini API key. Requires python-dotenv.
 
-Initialize Chroma DB:Run docs.py to embed microservice docs:
+Initialize Chroma DB:Embed microservice docs:
 python3.11 docs.py
 
 Creates ./chroma_db with 11 embedded chunks for 10 services.
@@ -46,53 +48,109 @@ Creates ./chroma_db with 11 embedded chunks for 10 services.
 
 Usage
 
-Test the RAG Chain:Run rag_chain.py to query the chatbot directly:
+Test the RAG Chain:Query directly:
 python3.11 rag_chain.py
 
 Example output:
 Response: To deploy the PaymentGatewayService on EKS:
 1. Create secret: `kubectl create secret generic stripe-keys ...`
 ...
+Source: PaymentGatewayService
 
 
-Launch Streamlit UI:Start the web interface:
+Launch Streamlit UI:Start the web app:
 streamlit run app.py
 
-Open http://localhost:8501 in your browser. Try queries like:
+Open http://localhost:8501. Try queries like:
 
 "How do I deploy UserAuthService?"
 "Troubleshoot BackupService."
 
 
 
-Adding New Docs
-To add new microservice documentation:
+
+📂 Project Structure
+
+
+
+File/Folder
+Description
+
+
+
+.env
+Gemini API key (not tracked)
+
+
+.gitignore
+Excludes venv, chroma_db, etc.
+
+
+requirements.txt
+Python dependencies
+
+
+docs.py
+Embeds microservice docs into Chroma DB
+
+
+rag_chain.py
+RAG pipeline with Gemini LLM
+
+
+app.py
+Streamlit frontend
+
+
+chroma_db/
+Chroma vector store (not tracked)
+
+
+
+🛠️ Adding New Docs
+To add microservice documentation:
 
 Edit the DOCS dictionary in docs.py.
-Delete the existing Chroma DB (if needed):rm -rf ./chroma_db
+(Optional) Clear existing Chroma DB:rm -rf ./chroma_db
+
 
 Re-run:python3.11 docs.py
 
 
 
-Apple Silicon: If torch is slow, upgrade to torch==2.2.2:pip install torch==2.2.2 --index-url https://download.pytorch.org/whl/cpu
+🐞 Troubleshooting
+
+Gemini API Errors:
+404 NotFound: Verify model (gemini-flash-latest):curl "https://generativelanguage.googleapis.com/v1beta/models?key=$GOOGLE_API_KEY"
+
+
+401/403: Regenerate key in Google AI Studio.
+
+
+Chroma Telemetry: Suppressed via ANONYMIZED_TELEMETRY=False.
+Port Conflicts: If localhost:8501 fails:streamlit run app.py --server.port 8502
+
+
+Apple Silicon: For slow torch, upgrade:pip install torch==2.2.2 --index-url https://download.pytorch.org/whl/cpu
 
 
 
-Contributing
+🤝 Contributing
 
-Fork the repository.
+Fork the repo.
 Create a feature branch: git checkout -b feature-name.
-Commit changes: git commit -m "Add feature".
+Commit: git commit -m "Add feature".
 Push: git push origin feature-name.
 Open a pull request.
 
-License
-MIT License. See LICENSE for details.
-Acknowledgments
+📜 License
+MIT License
+🙌 Acknowledgments
 
 Built with LangChain, Chroma, and Google Gemini.
-Inspired by DevOps best practices for AWS microservices.
+Inspired by AWS DevOps practices.
 
 
-Star this repo if you find it helpful! For issues, open a ticket or contact the maintainer.
+⭐ Star this repo if it helps you! For issues, open a ticket or contact the maintainer.
+
+
